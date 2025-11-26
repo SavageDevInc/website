@@ -1,0 +1,66 @@
+/* Sadece 768px ve altındaki cihazlar için geçerli olacak kurallar */
+
+/* Mouse/Işık Özelliklerini Devre Dışı Bırak */
+/* Bu kural, tarayıcı tarafından sadece mobile.css yüklendiği için zaten sadece mobil cihazlarda uygulanacaktır. */
+#cursor-dot, #ambient-light, html, body, a, button, .nav-item, input[type=range], section, h1, h2, h3, p, .glass-card {
+    cursor: default !important;
+}
+
+/* Navigasyon Küçültme */
+nav {
+    top: 15px;
+    padding: 6px 8px;
+}
+.nav-item {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+}
+
+/* Ana Başlık Küçültme */
+#home h1 {
+    font-size: 10vw; 
+    letter-spacing: -2px;
+}
+
+/* Kartları Tek Sütun Haline Getirme */
+.grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+}
+
+/* Kart ve Panel Kenar Boşlukları */
+.glass-card {
+    padding: 30px 20px;
+}
+
+/* Ayar ve AI Panel Pozisyonu */
+.settings-trigger {
+    bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem;
+    border-radius: 50%; /* Mobil'de yuvarlak daha hoş durur */
+}
+.panel {
+    bottom: 75px; right: 20px; width: calc(100% - 40px); /* Ekran genişliğine yayılma */
+    max-width: 350px;
+}
+
+.ai-trigger {
+    bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.3rem;
+}
+.ai-panel {
+    bottom: 75px; left: 20px; width: calc(100% - 40px); /* Ekran genişliğine yayılma */
+    height: 300px;
+    max-width: 350px;
+}
+
+/* Modal Küçültme */
+.payment-content {
+    padding: 20px;
+    max-height: 90vh; /* Mobil cihazlarda daha rahat kaydırma */
+    overflow-y: auto;
+}
+.payment-content h2 {
+    font-size: 2rem !important;
+}
+.payment-content p, .payment-content h3 {
+    font-size: 1rem !important;
+}

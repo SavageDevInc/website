@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAVAGE | Ultimate Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 768px)"> 
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="sarki.mp3" type="audio/mpeg"> 
+    </audio>
+
+    <div id="preloader"><div class="loader-text">SAVAGE</div></div>
+
+    <div id="autoplay-gate" onclick="startExperience()">
+        <div class="loader-text">SAVAGE</div>
+        <h2 style="margin-top: 30px;">Tıklayarak Başlat</h2>
+    </div>
+
+    <div id="ambient-light"></div>
+    <div id="cursor-dot"></div>
+
+    <nav>
+        <a href="#home" class="nav-item" onclick="showSection('home')">Home</a>
+        <a href="#pricing" class="nav-item" onclick="showSection('pricing')">Paketler</a>
+        <a href="#contact" class="nav-item" onclick="showSection('contact')">Contact</a>
+        
+        <div class="music-wrapper music-paused" id="musicPlayer">
+            <div class="music-icon" onclick="togglePlay()">
+                <div class="music-bars">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="ai-trigger" onclick="toggleAIPanel()">🤖</div>
+    <div class="ai-panel" id="aiPanel">
+        <h4 style="margin-bottom: 15px; color: var(--primary); text-align: center;">SAVAGE AI ASİSTAN</h4>
+        <div class="chat-messages" id="chatMessages">
+            <div class="ai-message">Merhaba! Kanalınızın veya markanızın ihtiyaçlarını anlatın, size en uygun paketi hemen bulalım!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="aiInput" placeholder="Mesajınızı yazın..." onkeydown="if(event.key === 'Enter') sendAIMessage()">
+            <button onclick="sendAIMessage()">▶</button>
+        </div>
+    </div>
+    <div class="settings-trigger" onclick="togglePanel()">⚙️</div>
+    <div class="panel" id="settingsPanel">
+        <h4 style="margin-bottom: 15px; color: var(--text-muted);">AYARLAR</h4>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span style="color:var(--text-main);">Aydınlık Mod</span>
+            <div style="width: 40px; height: 20px; background: #333; border-radius: 20px; position: relative; cursor: pointer;" onclick="toggleTheme(this)">
+                <div style="width: 16px; height: 16px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: 0.3s;" id="themeKnob"></div>
+            </div>
+        </div>
+
+        <h4 style="margin-bottom: 15px; color: var(--text-muted);">RENK</h4>
+        <div style="display: flex; gap: 10px;">
+            <div class="color-opt" style="background: #ff2a2a;" onclick="setColor('', this)"></div>
+            <div class="color-opt" style="background: #bc13fe;" onclick="setColor('theme-purple', this)"></div>
+            <div class="color-opt" style="background: #00f2ff;" onclick="setColor('theme-cyan', this)"></div>
+            <div class="color-opt" style="background: #ffd700;" onclick="setColor('theme-gold', this)"></div>
+        </div>
+    </div>
+
+    <section id="home">
+        <div class="reveal">
+            <div style="color: var(--primary); font-weight: 700; letter-spacing: 3px; margin-bottom: 20px;">EST. 2024</div>
+            <h1>SAVAGE<br>STUDIO</h1>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 500px; margin: 0 auto;">
+                Sıradan tasarımları unut. Markan için yırtıcı, modern ve akılda kalıcı görsel çözümler.
+            </p>
+            <br><br>
+            <a href="#pricing" class="btn-main" onclick="showSection('pricing')">BAŞLAYALIM</a>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2 class="reveal" style="font-size: 3rem; margin-bottom: 50px;">FİYATLAR</h2>
+        <div class="grid reveal">
+            <div class="glass-card">
+                <h3>STARTER</h3>
+                <h1 style="font-size: 3rem; margin: 20px 0; color: var(--text-main);">₺350</h1>
+                <p style="color: var(--text-muted);">Tek seferlik ihtiyaçlar.</p>
+                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+                <ul style="text-align: left; list-style: none; color: var(--text-muted); line-height: 2;">
+                    <li>+ 1 Premium Thumbnail</li>
+                    <li>+ Renk Düzenlemesi</li>
+                    <li>+ 2 Revizyon</li>
+                </ul>
+                <a class="btn-main" style="width: 100%; text-align: center;" onclick="openPayment()">SEÇ</a>
+            </div>
+             <div class="glass-card" style="border-color: var(--primary);">
+                <div style="position: absolute; top:0; right:0; background: var(--primary); color:#fff; padding: 5px 15px; font-size: 0.8rem; font-weight: bold;">EN İYİ</div>
+                <h3>CREATOR</h3>
+                <h1 style="font-size: 3rem; margin: 20px 0; color: var(--text-main);">₺2500</h1>
+                <p style="color: var(--text-muted);">Aylık düzenli içerik.</p>
+                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+                <ul style="text-align: left; list-style: none; color: var(--text-muted); line-height: 2;">
+                    <li>+ 10 Thumbnail</li>
+                    <li>+ Banner Tasarımı</li>
+                    <li>+ Sınırsız Revizyon</li>
+                    <li>+ Öncelikli Destek</li>
+                </ul>
+                <a class="btn-main" style="width: 100%; text-align: center; background: var(--primary); border: none; color: #fff;" onclick="openPayment()">BAŞLA</a>
+            </div>
+             <div class="glass-card">
+                <h3>BRANDING</h3>
+                <h1 style="font-size: 3rem; margin: 20px 0; color: var(--text-main);">₺7500</h1>
+                <p style="color: var(--text-muted);">Tam kapsamlı kimlik.</p>
+                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+                <ul style="text-align: left; list-style: none; color: var(--text-muted); line-height: 2;">
+                    <li>+ Logo Tasarımı</li>
+                    <li>+ Intro & Outro</li>
+                    <li>+ Sosyal Medya Kit</li>
+                    <li>+ Danışmanlık</li>
+                </ul>
+                <a class="btn-main" style="width: 100%; text-align: center;" onclick="openPayment()">TEKLİF AL</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment" style="min-height: 50vh; display:none;"></section>
+
+    <section id="contact">
+        <h2 class="reveal" style="font-size: 3rem; margin-bottom: 20px;">İLETİŞİM</h2>
+        <div class="reveal" style="width: 100%; max-width: 600px; background: var(--glass-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--glass-border);">
+            <form action="mailto:contact.savageinc@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" class="g-input" placeholder="Ad / Kanal Adı" required>
+                <input type="email" name="email" class="g-input" placeholder="E-posta" required>
+                <textarea name="message" rows="5" class="g-input" placeholder="Mesajınız..." required></textarea>
+                <button type="submit" class="btn-main" style="width: 100%; border: none; cursor: pointer;">GÖNDER</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="payment-modal">
+        <span class="payment-close" onclick="closePayment()">X</span>
+        <div class="reveal payment-content">
+            <h2 style="font-size: 3rem; margin-bottom: 20px; text-align: center;">ÖDEME & SATIN ALMA</h2>
+            <p style="color:var(--primary); font-weight:700; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">Seçtiğiniz paketin ödemesini aşağıdaki yöntemlerle yapabilirsiniz.</p>
+            
+            <h3 style="margin-top: 30px; color: var(--text-main);">💬 DISCORD İLETİŞİM</h3>
+            <blockquote style="margin-top: 10px;">
+                <p>Satın alma süreci ve detaylar için Discord üzerinden ulaşabilirsiniz:</p>
+                <p><strong>Discord:</strong> <span style="color: var(--primary); font-size: 1.2rem;">cagan.aloglu</span></p>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">(Hızlı yanıt almak için Discord'dan yazınız.)</p>
+            </blockquote>
+
+            <h3 style="margin-top: 30px; color: var(--text-main);">🏦 HAVALE/EFT (IBAN)</h3>
+            <blockquote style="margin-top: 10px;">
+                <p><strong>Banka:</strong> X Bankası A.Ş. <span style="color: var(--primary);">(BURAYI DEĞİŞTİR)</span></p>
+                <p><strong>IBAN:</strong> TRXX XXXX XXXX XXXX XXXX XXXX XX <span style="color: var(--primary);">(BURAYI DEĞİŞTİR)</span></p>
+                <p><strong>Alıcı Adı:</strong> SAVAGE STUDIO LTD. ŞTİ. <span style="color: var(--primary);">(BURAYI DEĞİŞTİR)</span></p>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">Açıklamaya lütfen Discord kullanıcı adınızı veya kanal adınızı yazınız.</p>
+            </blockquote>
+
+            <h3 style="margin-top: 30px; color: var(--text-main);">💳 ONLINE ÖDEME (PAYTR / SHOPİER)</h3>
+            <p style="color: var(--text-muted); margin-top: 10px;">
+                Online ödeme linkiniz (PayTR/Shopier) burada yer alacaktır. Lütfen linkinizi buraya ekleyiniz: 
+                <a href="#" style="color: var(--primary); font-weight: bold; text-decoration: none;">[ONLINE ÖDEME LİNKİNİZ]</a>
+            </p>
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="#home" class="btn-main" onclick="closePayment()">ANA SAYFAYA DÖN</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
